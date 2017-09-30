@@ -57,8 +57,8 @@
 		45DD8A601F7FDEEE009D4D06 /* DataPost+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataPost+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		45DD8A611F7FDEEE009D4D06 /* DataPost+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataPost+CoreDataClass.swift"; sourceTree = "<group>"; };
 		45DD8A631F7FE16B009D4D06 /* LoginViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewViewController.swift; sourceTree = "<group>"; };
-		45EC7C781F800FF300D1D9AE /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		45EC7C791F800FF300D1D9AE /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		45EC7C7B1F80177600D1D9AE /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		45EC7C7C1F80177600D1D9AE /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4E4763DB041E895A7A7A7B17 /* Pods-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.release.xcconfig"; path = "Pods/Target Support Files/Pods-test/Pods-test.release.xcconfig"; sourceTree = "<group>"; };
 		57AD01F6AC4D6EA4EA41CDCC /* Pods_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC59B02255A647E1504262D7 /* Pods-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-test/Pods-test.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,10 +105,10 @@
 		453937EC1F72E78A00553EF1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				45EC7C7A1F80171900D1D9AE /* SignupViewController */,
 				451CF9731F7FF95700A88DE3 /* NavigationController */,
 				45DD8A621F7FDF45009D4D06 /* LoginViewController */,
 				453937EE1F72E7C500553EF1 /* MessageViewController */,
-				451CF9761F80039600A88DE3 /* SignupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -239,8 +239,8 @@
 		45DD8A5F1F7FDED7009D4D06 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				45EC7C791F800FF300D1D9AE /* User+CoreDataClass.swift */,
-				45EC7C781F800FF300D1D9AE /* User+CoreDataProperties.swift */,
+				45EC7C7C1F80177600D1D9AE /* User+CoreDataClass.swift */,
+				45EC7C7B1F80177600D1D9AE /* User+CoreDataProperties.swift */,
 				45DD8A611F7FDEEE009D4D06 /* DataPost+CoreDataClass.swift */,
 				45DD8A601F7FDEEE009D4D06 /* DataPost+CoreDataProperties.swift */,
 				45DD8A5A1F7FCDC5009D4D06 /* coreDataModel.xcdatamodeld */,
@@ -254,6 +254,14 @@
 				45DD8A631F7FE16B009D4D06 /* LoginViewViewController.swift */,
 			);
 			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		45EC7C7A1F80171900D1D9AE /* SignupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				451CF9761F80039600A88DE3 /* SignupViewController.swift */,
+			);
+			path = SignupViewController;
 			sourceTree = "<group>";
 		};
 		FF7094C767FD55393B265861 /* Frameworks */ = {

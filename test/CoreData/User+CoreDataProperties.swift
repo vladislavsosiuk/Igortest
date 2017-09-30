@@ -18,5 +18,6 @@ extension User {
 
     @NSManaged public var email: String?
     @NSManaged public var password: String?
+    @NSManaged public var loginedUser: Bool
 
 }

@@ -132,8 +132,8 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
                 messages = nil
                 APIManager.getPosts(callBack: {
                     result in
-                    if selectedButton == .myStudents{
-                    self.posts = result
+                    if self.selectedButton == .myStudents{
+                        self.posts = result
                     }
                 })
             case .myTuDrs:

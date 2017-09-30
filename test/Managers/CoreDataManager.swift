@@ -110,6 +110,7 @@ class CoreDataManager{
         
         managedObject.email = email
         managedObject.password = password
+        managedObject.loginedUser = true
         
         
         // Запись объекта
@@ -137,6 +138,19 @@ class CoreDataManager{
         
         do {
             let results = try self.managedObjectContext.fetch(fetchRequest)
+            let user = results[0] as! User
+            user.loginedUser = true
+            return results.count>0
+        } catch {
+            print(error)
+        }
+        return false
+    }
+    func isLogined()->Bool{
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "loginedUser == %@", NSNumber(booleanLiteral: true))
+        do {
+            let results = try self.managedObjectContext.fetch(fetchRequest)            
             return results.count>0
         } catch {
             print(error)

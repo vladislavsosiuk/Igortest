@@ -11,6 +11,12 @@ import Alamofire
 import AlamofireImage
 
 class MessageTableViewCell: UITableViewCell {
+    
+    static var Identifier:String{
+        get{
+            return "MessageTableViewCell"
+        }
+    }
 
     @IBOutlet weak var nameLabel: UILabel!
     
@@ -26,15 +32,15 @@ class MessageTableViewCell: UITableViewCell {
         
         let attributtedString = NSMutableAttributedString()
         
-        attributtedString.append(NSAttributedString(attributedString: NSAttributedString(string: message.name+" ", attributes: [NSFontAttributeName: MyFonts.mainFontBold()])))
-        attributtedString.append(NSAttributedString(attributedString: NSAttributedString(string: message.text, attributes: [NSFontAttributeName: MyFonts.mainFont()])))
+        attributtedString.append(NSAttributedString(attributedString: NSAttributedString(string: message.name+" ", attributes: [NSFontAttributeName: Style.mainFont])))
+        attributtedString.append(NSAttributedString(attributedString: NSAttributedString(string: message.text, attributes: [NSFontAttributeName: Style.mainFont])))
         
         self.nameLabel.attributedText=attributtedString
-        self.nameLabel.textColor=MyColors.mainColor()
+        self.nameLabel.textColor=Style.mainColor
         
         let url = URL(string: message.image)
         if(message.image != "defaultImage"){
-            self.imagee.af_setImage(withURL: url!)
+            self.imagee.downloadFromUrl(url: url!)
         }else{
             self.imagee.image = #imageLiteral(resourceName: "defaultImage")
         }
@@ -46,7 +52,7 @@ class MessageTableViewCell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy"
         self.date.text = dateFormatter.string(from: message.date)
-        self.date.font = MyFonts.mainFont()
-        self.date.textColor = MyColors.mainColor()
+        self.date.font = Style.mainFont
+        self.date.textColor = Style.mainColor
     }
 }

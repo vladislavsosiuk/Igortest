@@ -8,6 +8,7 @@
 
 import UIKit
 
+//extension that converts CAGradienLayer to UIImage
 extension CAGradientLayer {
     
     convenience init(frame: CGRect, colors: [UIColor]) {

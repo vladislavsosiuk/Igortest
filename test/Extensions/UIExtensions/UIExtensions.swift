@@ -7,26 +7,25 @@
 //
 
 import UIKit
-extension UIImageView {
-    func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() { () -> Void in
-                self.image = image
-            }
-            }.resume()
-    }
-    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link) else { return }
-        downloadedFrom(url: url, contentMode: mode)
+import Alamofire
+import AlamofireImage
+//shows error alert
+extension UIViewController{
+    func showAlert(message:String){
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+        self.present(alertController,animated: true, completion: nil)
     }
 }
+
+//async image download with alamofire
+extension UIImageView {
+    func downloadFromUrl(url: URL){
+        self.af_setImage(withURL: url)
+    }
+    
+}
+//sets gradientbackground colors to UINAvigationBar
 extension UINavigationBar {
     
     func setGradientBackground(colors: [UIColor]) {
@@ -38,6 +37,8 @@ extension UINavigationBar {
         setBackgroundImage(gradientLayer.creatGradientImage(), for: UIBarMetrics.default)
     }
 }
+
+//creates shadow to UIViews which can be used in interfacebuilder
 extension UIView {
     
     @IBInspectable var shadow: Bool {
@@ -76,7 +77,7 @@ extension UIView {
         layer.shadowRadius = shadowRadius
     }
 }
-
+//creates UIColor from hex string
 extension UIColor {
     convenience init(hex: String) {
         let scanner = Scanner(string: hex)

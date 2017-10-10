@@ -28,18 +28,14 @@ class LoginViewViewController: UIViewController {
             showAlert(message: "Password is not valid")
             return
         }
-        var coreDateManager = CoreDataManager()
-        let logined = coreDateManager.login(email: emailTextField.text!, password: passwordTextField.text!)
+        let coreDateManager = CoreDataManager()
+        let logined = coreDateManager.findUserByEmailAndPassword(email: emailTextField.text!, password: passwordTextField.text!)
         if logined{
-        let pmvc = self.storyboard!.instantiateViewController(withIdentifier: String(describing: MessagesAndPostsViewController.self))
-        self.navigationController?.show(pmvc, sender: self)
+            let pmvc = self.storyboard!.instantiateViewController(withIdentifier: String(describing: MessagesAndPostsViewController.self))
+            self.navigationController?.show(pmvc, sender: self)
         }else{
             self.showAlert(message: "User not found")
         }
-    }
-    @IBAction func signupButtonClicked(_ sender: UIButton) {
-        var signVC = self.storyboard!.instantiateViewController(withIdentifier: String(describing: SignupViewController.self)) as! SignupViewController
-        self.navigationController?.show(signVC, sender: self)
     }
    
     func emailIsValid()->Bool{

@@ -32,7 +32,7 @@ class SignupViewController: UIViewController {
             return
         }
         let coreDataManager = CoreDataManager()
-        coreDataManager.signUp(email: emailInput.text!, password: passwordInput.text!,birthday:  birthdayDatePicker.date)
+        coreDataManager.registerNewUser(email: emailInput.text!, password: passwordInput.text!,birthday:  birthdayDatePicker.date)
         
         let mpvc = self.storyboard!.instantiateViewController(withIdentifier: String(describing: MessagesAndPostsViewController.self)) as! MessagesAndPostsViewController
         self.navigationController?.show(mpvc, sender: self)
@@ -60,12 +60,14 @@ class SignupViewController: UIViewController {
         return firstPassword == secondPassword
     }
     func olderThan18()->Bool{
-        return true
-        
+       return true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let nowDate = Date()
+        let maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: nowDate)
+        birthdayDatePicker.maximumDate = maximumDate
         // Do any additional setup after loading the view.
     }
 

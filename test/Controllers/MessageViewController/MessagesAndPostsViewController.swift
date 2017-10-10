@@ -51,8 +51,15 @@ extension MessagesAndPostsViewController:UITableViewDelegate, UITableViewDataSou
             
             return cell
         }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
+        tableView.deselectRow(at: indexPath, animated: true)
+        if messages == nil{
+            return
+        }
+        let vcfcv = self.storyboard!.instantiateViewController(withIdentifier: ViewControllerForCollectionView.identifier)
+        self.navigationController?.show(vcfcv, sender: self)
         
     }
 }
@@ -64,6 +71,8 @@ enum SegmentedButtons:Int{
 }
 
 class MessagesAndPostsViewController: UIViewController, ContainsPosts{
+    
+    var activityIndicator:UIActivityIndicatorView? = nil
     
     var messages :[Message]?{
         didSet{
@@ -126,21 +135,31 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
         
         switch(dataType){
             case .mentions:
+                activityIndicator?.stopAnimating()
                 posts = nil
                 messages = APIManager.getMessages(parameter: selectedButton.rawValue)
             case .myStudents:
                 messages = nil
+                activityIndicator?.startAnimating()
                 APIManager.getPosts(callBack: {
                     result in
+                    self.activityIndicator?.stopAnimating()
                     if self.selectedButton == .myStudents{
                         self.posts = result
                     }
                 })
             case .myTuDrs:
+                activityIndicator?.stopAnimating()
                 posts = nil
                 messages = APIManager.getMessages(parameter: selectedButton.rawValue)
         }
         
+    }
+    func setActivityIndicator()->UIActivityIndicatorView{
+        let ai = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+        ai.center = self.view.center
+        self.view.addSubview(ai)
+        return ai
     }
   
     @IBOutlet weak var tableView: UITableView!
@@ -166,6 +185,10 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
         //sets tableviewcell to fit its content
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 44.0;
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        activityIndicator = setActivityIndicator()
     }
     
     func setNavIcons(){
@@ -176,10 +199,17 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
         //sets left navigationbar button
         self.navigationItem.setLeftBarButton(makeBarButtonItem(withImage:#imageLiteral(resourceName: "defaultImage")), animated: true)
         //sets right navigationbar button
-        self.navigationItem.setRightBarButton(makeBarButtonItem(withImage: #imageLiteral(resourceName: "gearIcon"), contentMode:.center), animated: true)
+        self.navigationItem.setRightBarButton(makeBarButtonItem(withImage: #imageLiteral(resourceName: "gearIcon"), contentMode:.center, action: #selector(signOut)), animated: true)
+    }
+    func signOut(sender: AnyObject?){
+        let coreDataManager = CoreDataManager()
+        coreDataManager.signOutUser()
+        let lvc = self.storyboard!.instantiateViewController(withIdentifier: String(describing:LoginViewViewController.self)) as! LoginViewViewController
+        
+        self.navigationController?.show(lvc, sender: self)
     }
     //creates UIBarButtonItem from UIImage
-    func makeBarButtonItem(withImage image:UIImage, contentMode:UIViewContentMode = .scaleAspectFill)->UIBarButtonItem{
+    func makeBarButtonItem(withImage image:UIImage, contentMode:UIViewContentMode = .scaleAspectFill, action: Selector? = nil)->UIBarButtonItem{
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         let imageView = UIImageView(image: image)
         imageView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
@@ -188,6 +218,8 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
         view.cornerRadius=20
         view.clipsToBounds = true
         let item = UIBarButtonItem(customView: view)
+        item.target = self
+        item.action = action
         return item
     }
     

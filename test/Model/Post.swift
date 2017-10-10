@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 
-public class Post: Mappable{
+class Post: Mappable{
     var userId:Int?
     var id:Int?
     var title:String?

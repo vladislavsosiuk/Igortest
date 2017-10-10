@@ -12,23 +12,24 @@ class NavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let coreDataManager = CoreDataManager()
-//        if true{
-//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let mpvc = storyBoard.instantiateViewController(withIdentifier: String(describing: MessagesAndPostsViewController.self)) as! MessagesAndPostsViewController
-//            self.navigationController?.show(mpvc, sender: nil)
-//        }else{
-//            let lvc = self.storyboard!.instantiateViewController(withIdentifier: String(describing:LoginViewViewController.self)) as! LoginViewViewController
-//            self.navigationController?.show(lvc,sender: nil)
-//        }
-
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        let coreDataManager = CoreDataManager()
+        if coreDataManager.loginedAlreadyUserExists(){
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let mpvc = storyBoard.instantiateViewController(withIdentifier: String(describing: MessagesAndPostsViewController.self)) as! MessagesAndPostsViewController
+            self.show(mpvc, sender: self)
+        }else{
+            let tbc = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController")
+            
+            self.show(tbc,sender: self)
+        }
     }
     
 

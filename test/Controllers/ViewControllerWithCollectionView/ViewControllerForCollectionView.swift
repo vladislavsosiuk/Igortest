@@ -49,8 +49,9 @@ class ViewControllerForCollectionView: UIViewController {
             selectedButton = .threeColumns
         case twoColumnsButton:
             selectedButton = .twoColumns
-        default:
-            <#code#>
+        default:()
+        
+            
         }
     }
     func updateCollectionView(_ button: UIButton){

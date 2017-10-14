@@ -426,7 +426,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="USg-3A-MwM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lXG-9O-sE9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="TabBarController" id="9cX-8g-aV7" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CPS-Z7-ulF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -447,8 +446,9 @@
                         <segue destination="LzQ-Hd-GlA" kind="relationship" relationship="viewControllers" id="GcE-Ej-YSG"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lXG-9O-sE9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1081" y="75"/>
+            <point key="canvasLocation" x="-922" y="372"/>
         </scene>
         <!--SignUp-->
         <scene sceneID="36G-uS-ARC">

@@ -197,29 +197,28 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
         //sets middle navigationbar icon
         self.navigationItem.titleView = imageView
         //sets left navigationbar button
-        self.navigationItem.setLeftBarButton(makeBarButtonItem(withImage:#imageLiteral(resourceName: "defaultImage")), animated: true)
+        self.navigationItem.setLeftBarButton(makeBarButtonItem(withImage:#imageLiteral(resourceName: "defaultImage"), contentMode: .scaleAspectFit), animated: true)
         //sets right navigationbar button
         self.navigationItem.setRightBarButton(makeBarButtonItem(withImage: #imageLiteral(resourceName: "gearIcon"), contentMode:.center, action: #selector(signOut)), animated: true)
     }
     func signOut(sender: AnyObject?){
         let coreDataManager = CoreDataManager()
         coreDataManager.signOutUser()
-        let lvc = self.storyboard!.instantiateViewController(withIdentifier: String(describing:LoginViewViewController.self)) as! LoginViewViewController
-        
-        self.navigationController?.show(lvc, sender: self)
+        let tbc = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController")
+        self.navigationController?.show(tbc, sender: self)
     }
     //creates UIBarButtonItem from UIImage
     func makeBarButtonItem(withImage image:UIImage, contentMode:UIViewContentMode = .scaleAspectFill, action: Selector? = nil)->UIBarButtonItem{
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        let imageView = UIImageView(image: image)
-        imageView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        imageView.contentMode = contentMode
-        view.addSubview(imageView)
-        view.cornerRadius=20
-        view.clipsToBounds = true
-        let item = UIBarButtonItem(customView: view)
-        item.target = self
-        item.action = action
+        let navButton = UIButton(frame: CGRect(x:0,y:0,width: Style.navItemWidthAndHeight,height: Style.navItemWidthAndHeight))
+        if let action = action{
+            navButton.addTarget(self, action: action, for: .touchUpInside)
+        }
+        navButton.setImage(image, for: .normal)
+        navButton.imageView?.contentMode = contentMode
+        navButton.imageView?.frame = navButton.frame
+        navButton.cornerRadius = Style.navItemCornerRadius
+        navButton.clipsToBounds = true
+        let item = UIBarButtonItem(customView: navButton)
         return item
     }
     

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		450556C71F88DF50006350D0 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450556C61F88DF50006350D0 /* Helpers.swift */; };
-		450556CC1F890881006350D0 /* ViewControllerForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450556CB1F890881006350D0 /* ViewControllerForCollectionView.swift */; };
+		450556CC1F890881006350D0 /* MyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450556CB1F890881006350D0 /* MyCollectionViewController.swift */; };
 		451CF9721F7FF2E900A88DE3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CF9711F7FF2E900A88DE3 /* NetworkManager.swift */; };
 		451CF9751F7FF98500A88DE3 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CF9741F7FF98500A88DE3 /* NavigationController.swift */; };
 		451CF9771F80039600A88DE3 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CF9761F80039600A88DE3 /* SignupViewController.swift */; };
@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		450556C61F88DF50006350D0 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		450556CB1F890881006350D0 /* ViewControllerForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerForCollectionView.swift; sourceTree = "<group>"; };
+		450556CB1F890881006350D0 /* MyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
 		451CF9711F7FF2E900A88DE3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		451CF9741F7FF98500A88DE3 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		451CF9761F80039600A88DE3 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -95,13 +95,13 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		450556C81F890638006350D0 /* ViewControllerWithCollectionView */ = {
+		450556C81F890638006350D0 /* MyCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
 				45D837291F891DB90002C05E /* Cells */,
-				450556CB1F890881006350D0 /* ViewControllerForCollectionView.swift */,
+				450556CB1F890881006350D0 /* MyCollectionViewController.swift */,
 			);
-			path = ViewControllerWithCollectionView;
+			path = MyCollectionViewController;
 			sourceTree = "<group>";
 		};
 		451CF9731F7FF95700A88DE3 /* NavigationController */ = {
@@ -124,7 +124,7 @@
 		453937EC1F72E78A00553EF1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				450556C81F890638006350D0 /* ViewControllerWithCollectionView */,
+				450556C81F890638006350D0 /* MyCollectionViewController */,
 				45EC7C7A1F80171900D1D9AE /* SignupViewController */,
 				451CF9731F7FF95700A88DE3 /* NavigationController */,
 				45DD8A621F7FDF45009D4D06 /* LoginViewController */,
@@ -446,7 +446,7 @@
 				4592DA491F71805C009B9827 /* Message.swift in Sources */,
 				451CF9751F7FF98500A88DE3 /* NavigationController.swift in Sources */,
 				45C86DAF1F73E8B600BB2C59 /* UIExtensions.swift in Sources */,
-				450556CC1F890881006350D0 /* ViewControllerForCollectionView.swift in Sources */,
+				450556CC1F890881006350D0 /* MyCollectionViewController.swift in Sources */,
 				451CF9771F80039600A88DE3 /* SignupViewController.swift in Sources */,
 				4535A5DC1F7EC9CE009A71B1 /* PostTableViewCell.swift in Sources */,
 				450556C71F88DF50006350D0 /* Helpers.swift in Sources */,

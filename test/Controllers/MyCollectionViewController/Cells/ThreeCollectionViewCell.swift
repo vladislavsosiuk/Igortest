@@ -10,4 +10,13 @@ import UIKit
 
 class ThreeCollectionViewCell: UICollectionViewCell {
     public static let identifier = "collectionCell"
+    
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var label: UILabel!
+    
+    
+    func makeCell(message: Message){
+        self.image.af_setImage(withURL: URL(string: message.image)!)
+        self.label.text = message.text
+    }
 }

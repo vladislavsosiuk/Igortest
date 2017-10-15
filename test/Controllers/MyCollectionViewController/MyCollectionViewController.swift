@@ -8,35 +8,26 @@
 
 import UIKit
 
-enum columnButtons{
-    case threeColumns
-    case twoColumns
-    case oneColumn
+enum columnButtons:Int{
+    case threeColumns=3
+    case twoColumns=2
+    case oneColumn=1
 }
 
-extension ViewControllerForCollectionView: UICollectionViewDelegate, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThreeCollectionViewCell.identifier, for: indexPath)
-        cell.backgroundColor = .black
-        return cell
-    }
-    
-}
+
 
 class ViewControllerForCollectionView: UIViewController {
-    
+    static let identifier = "ViewControllerForCollectionView"
     
     var selectedButton:columnButtons = .threeColumns
-    var posts = [Post]()
+    var messages = [Message]()
+    
 
     @IBOutlet weak var threeColumnsButton: UIButton!
     @IBOutlet weak var twoColumnsButton: UIButton!
     @IBOutlet weak var oneColumnButton: UIButton!
     
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func segmentedButtonTapped(_ sender: UIButton) {
         deselectCurrentButton()
         changeSelectedButton(sender)
@@ -49,18 +40,15 @@ class ViewControllerForCollectionView: UIViewController {
             selectedButton = .threeColumns
         case twoColumnsButton:
             selectedButton = .twoColumns
+        case oneColumnButton:
+            selectedButton = .oneColumn
         default:()
         
             
         }
     }
     func updateCollectionView(_ button: UIButton){
-//        switch button {
-//        case threeColumnsButton:
-//            
-//        default:
-//            <#code#>
-//        }
+        collectionView.reloadData()
     }
     func deselectCurrentButton(){
         
@@ -75,29 +63,30 @@ class ViewControllerForCollectionView: UIViewController {
         }
         oldButton?.titleLabel?.font = Style.mainFont
     }
-    
-    static let identifier = "ViewControllerForCollectionView"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        collectionView.reloadData()
     }
     
+    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+}
+extension ViewControllerForCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messages.count
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThreeCollectionViewCell.identifier, for: indexPath) as! ThreeCollectionViewCell
+        
+        cell.makeCell(message: messages[indexPath.row])
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let inset = 10
+        let width = collectionView.frame.width/CGFloat(selectedButton.rawValue)-CGFloat(inset)
+        
+        return CGSize(width:width, height: width)
+    }
 }

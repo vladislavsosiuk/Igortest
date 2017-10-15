@@ -14,55 +14,7 @@ protocol ContainsPosts {
 }
 
 
-extension MessagesAndPostsViewController:UITableViewDelegate, UITableViewDataSource{
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if let unwrPosts = posts{
-            return unwrPosts.count
-        }else if let unwrMessages = messages{
-            return unwrMessages.count
-        }else{
-            return 0
-        }
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let unwrPosts = posts {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.Identifier, for: indexPath) as! PostTableViewCell
-            
-            
-            let post = unwrPosts[indexPath.row]
-            cell.makeCell(fromPost: post)
-            
-            return cell
-            
-        }else{
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.Identifier, for: indexPath) as! MessageTableViewCell
-            
-            
-            let message = messages![indexPath.row]
-            cell.makeCell(fromMessage: message)
-            
-            return cell
-        }
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        if messages == nil{
-            return
-        }
-        let vcfcv = self.storyboard!.instantiateViewController(withIdentifier: ViewControllerForCollectionView.identifier)
-        self.navigationController?.show(vcfcv, sender: self)
-        
-    }
-}
+
 
 
 enum SegmentedButtons:Int{
@@ -224,5 +176,55 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
     
     
 
+}
+extension MessagesAndPostsViewController:UITableViewDelegate, UITableViewDataSource{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if let unwrPosts = posts{
+            return unwrPosts.count
+        }else if let unwrMessages = messages{
+            return unwrMessages.count
+        }else{
+            return 0
+        }
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let unwrPosts = posts {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.Identifier, for: indexPath) as! PostTableViewCell
+            
+            
+            let post = unwrPosts[indexPath.row]
+            cell.makeCell(fromPost: post)
+            
+            return cell
+            
+        }else{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.Identifier, for: indexPath) as! MessageTableViewCell
+            
+            
+            let message = messages![indexPath.row]
+            cell.makeCell(fromMessage: message)
+            
+            return cell
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        if messages == nil{
+            return
+        }
+        let vcfcv = self.storyboard!.instantiateViewController(withIdentifier: ViewControllerForCollectionView.identifier) as! ViewControllerForCollectionView
+        vcfcv.messages = self.messages!
+        self.navigationController?.show(vcfcv, sender: self)
+        
+    }
 }
 

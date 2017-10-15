@@ -17,10 +17,10 @@ enum Style{
     private static let boldFontName = "Avenir-Heavy"
     
     static let startGradientColor = UIColor(hex:"304075")
-    static var endGradientColor = UIColor(hex:"6c7baa")
-    static var mainColor = UIColor(hex: "364563")
-    static var mainFont = UIFont(name: mainFontName, size: fontSize)!
-    static var mainFontBold = UIFont(name: boldFontName, size: fontSize)!
-    static var navItemWidthAndHeight = 40
-    static var navItemCornerRadius = CGFloat(20)
+    static let endGradientColor = UIColor(hex:"6c7baa")
+    static let mainColor = UIColor(hex: "364563")
+    static let mainFont = UIFont(name: mainFontName, size: fontSize)!
+    static let mainFontBold = UIFont(name: boldFontName, size: fontSize)!
+    static let navItemWidthAndHeight = 40
+    static let navItemCornerRadius = CGFloat(20)
 }

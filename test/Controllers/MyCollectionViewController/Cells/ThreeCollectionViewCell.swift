@@ -18,5 +18,7 @@ class ThreeCollectionViewCell: UICollectionViewCell {
     func makeCell(message: Message){
         self.image.af_setImage(withURL: URL(string: message.image)!)
         self.label.text = message.text
+        self.label.font = Style.mainFont
+        self.label.textColor=Style.mainColor
     }
 }

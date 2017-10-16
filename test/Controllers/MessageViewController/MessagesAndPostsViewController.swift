@@ -8,21 +8,12 @@
 
 import UIKit
 
-protocol ContainsPosts {
-    func setPosts(posts: [Post]?)
-    
-}
-
-
-
-
-
 enum SegmentedButtons:Int{
     case mentions=0, myStudents, myTuDrs
     
 }
 
-class MessagesAndPostsViewController: UIViewController, ContainsPosts{
+class MessagesAndPostsViewController: UIViewController{
     
     var activityIndicator:UIActivityIndicatorView? = nil
     
@@ -36,28 +27,26 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
             tableView.reloadData()
         }
     }
-    //conforms protocol ContainsPosts
-    func setPosts(posts: [Post]?) {
-        self.posts = posts
-    }
     
-    required init?(coder: NSCoder){
-        
-        messages = nil
-        posts = nil
-        super.init(coder: coder)
-    }
+    
     var selectedButton:SegmentedButtons = .mentions
     
     @IBOutlet weak var mentioned: UIButton!
     @IBOutlet weak var myStudents: UIButton!
     @IBOutlet weak var myTuDrs: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     @IBAction func segmentedButtonClicked(_ sender: UIButton) {
         
         setDefaultStateToLastButton()
         updateSelectedButtonAndSetSelectedState(button: sender)
         updateData(selectedButton)
+    }
+    required init?(coder: NSCoder){
+        
+        messages = nil
+        posts = nil
+        super.init(coder: coder)
     }
     func setDefaultStateToLastButton(){
         switch selectedButton{
@@ -113,9 +102,6 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
         self.view.addSubview(ai)
         return ai
     }
-  
-    @IBOutlet weak var tableView: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -150,6 +136,7 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
         self.navigationItem.titleView = imageView
         //sets left navigationbar button
         self.navigationItem.setLeftBarButton(makeBarButtonItem(withImage:#imageLiteral(resourceName: "defaultImage"), contentMode: .scaleAspectFit), animated: true)
+        
         //sets right navigationbar button
         self.navigationItem.setRightBarButton(makeBarButtonItem(withImage: #imageLiteral(resourceName: "gearIcon"), contentMode:.center, action: #selector(signOut)), animated: true)
     }
@@ -165,6 +152,11 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
         if let action = action{
             navButton.addTarget(self, action: action, for: .touchUpInside)
         }
+        
+        let widthConstraint = navButton.widthAnchor.constraint(equalToConstant: CGFloat(Style.navItemWidthAndHeight))
+        let heightConstraint = navButton.heightAnchor.constraint(equalToConstant: CGFloat(Style.navItemWidthAndHeight))
+        heightConstraint.isActive = true
+        widthConstraint.isActive = true
         navButton.setImage(image, for: .normal)
         navButton.imageView?.contentMode = contentMode
         navButton.imageView?.frame = navButton.frame
@@ -173,8 +165,6 @@ class MessagesAndPostsViewController: UIViewController, ContainsPosts{
         let item = UIBarButtonItem(customView: navButton)
         return item
     }
-    
-    
 
 }
 extension MessagesAndPostsViewController:UITableViewDelegate, UITableViewDataSource{

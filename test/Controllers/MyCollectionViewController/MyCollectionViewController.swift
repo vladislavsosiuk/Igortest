@@ -67,6 +67,7 @@ class ViewControllerForCollectionView: UIViewController {
         super.viewDidLoad()
         
         collectionView.reloadData()
+        self.navigationController?.navigationBar.tintColor = .white
     }
     
     

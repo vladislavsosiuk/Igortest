@@ -68,23 +68,8 @@ class SignupViewController: UIViewController {
         let nowDate = Date()
         let maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: nowDate)
         birthdayDatePicker.maximumDate = maximumDate
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

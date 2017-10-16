@@ -9,6 +9,7 @@
 import UIKit
 
 class LoginViewViewController: UIViewController {
+    var coreDataManager:CoreDataManager?
 
     @IBOutlet weak var emailTextField: UITextField!
    
@@ -28,10 +29,11 @@ class LoginViewViewController: UIViewController {
             showAlert(message: "Password is not valid")
             return
         }
-        let coreDateManager = CoreDataManager()
-        let logined = coreDateManager.findUserByEmailAndPassword(email: emailTextField.text!, password: passwordTextField.text!)
-        if logined{
-            let pmvc = self.storyboard!.instantiateViewController(withIdentifier: String(describing: MessagesAndPostsViewController.self))
+        
+        let logined = self.coreDataManager?.findUserByEmailAndPassword(email: emailTextField.text!, password: passwordTextField.text!)
+        if logined != nil && logined!{
+            let pmvc = self.storyboard!.instantiateViewController(withIdentifier: String(describing: MessagesAndPostsViewController.self)) as! MessagesAndPostsViewController
+            pmvc.coreDataManager=self.coreDataManager
             self.navigationController?.show(pmvc, sender: self)
         }else{
             self.showAlert(message: "User not found")

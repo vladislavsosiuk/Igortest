@@ -15,6 +15,8 @@ enum SegmentedButtons:Int{
 
 class MessagesAndPostsViewController: UIViewController{
     
+    var coreDataManager:CoreDataManager?
+    
     var activityIndicator:UIActivityIndicatorView? = nil
     
     var messages :[Message]?{
@@ -82,7 +84,7 @@ class MessagesAndPostsViewController: UIViewController{
             case .myStudents:
                 messages = nil
                 activityIndicator?.startAnimating()
-                APIManager.getPosts(callBack: {
+                APIManager.getPosts(coreDataManager: self.coreDataManager!,callBack: {
                     result in
                     self.activityIndicator?.stopAnimating()
                     if self.selectedButton == .myStudents{
@@ -141,9 +143,10 @@ class MessagesAndPostsViewController: UIViewController{
         self.navigationItem.setRightBarButton(makeBarButtonItem(withImage: #imageLiteral(resourceName: "gearIcon"), contentMode:.center, action: #selector(signOut)), animated: true)
     }
     func signOut(sender: AnyObject?){
-        let coreDataManager = CoreDataManager()
-        coreDataManager.signOutUser()
-        let tbc = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController")
+        self.coreDataManager?.signOutUser()
+        let tbc = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController")as!UITabBarController
+        (tbc.viewControllers![0] as! LoginViewViewController).coreDataManager=self.coreDataManager
+        (tbc.viewControllers![1] as! SignupViewController).coreDataManager=self.coreDataManager
         self.navigationController?.show(tbc, sender: self)
     }
     //creates UIBarButtonItem from UIImage

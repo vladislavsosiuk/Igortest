@@ -9,6 +9,7 @@
 import UIKit
 
 class SignupViewController: UIViewController {
+    var coreDataManager:CoreDataManager?
 
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
@@ -31,10 +32,10 @@ class SignupViewController: UIViewController {
             self.showAlert(message: "You are too young")
             return
         }
-        let coreDataManager = CoreDataManager()
-        coreDataManager.registerNewUser(email: emailInput.text!, password: passwordInput.text!,birthday:  birthdayDatePicker.date)
+        self.coreDataManager?.registerNewUser(email: emailInput.text!, password: passwordInput.text!,birthday:  birthdayDatePicker.date)
         
         let mpvc = self.storyboard!.instantiateViewController(withIdentifier: String(describing: MessagesAndPostsViewController.self)) as! MessagesAndPostsViewController
+        mpvc.coreDataManager = coreDataManager
         self.navigationController?.show(mpvc, sender: self)
     }
     func emailIsValid()->Bool{

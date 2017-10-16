@@ -15,10 +15,12 @@ class NavigationController: UINavigationController {
         if coreDataManager.loginedAlreadyUserExists(){
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let mpvc = storyBoard.instantiateViewController(withIdentifier: String(describing: MessagesAndPostsViewController.self)) as! MessagesAndPostsViewController
+            mpvc.coreDataManager = coreDataManager
             self.show(mpvc, sender: self)
         }else{
-            let tbc = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController")
-            
+            let tbc = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+            (tbc.viewControllers![0] as! LoginViewViewController).coreDataManager = coreDataManager
+            (tbc.viewControllers![1] as! SignupViewController).coreDataManager = coreDataManager
             self.show(tbc,sender: self)
         }
     }

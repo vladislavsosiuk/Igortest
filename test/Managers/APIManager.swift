@@ -17,8 +17,8 @@ class APIManager{
     
     
     
-    static func getPosts(callBack:@escaping DataCallback<[Post]>){
-        let coreDataManager = CoreDataManager()
+    static func getPosts(coreDataManager:CoreDataManager,callBack:@escaping DataCallback<[Post]>){
+        
         if coreDataManager.containsPosts(){
             let posts = coreDataManager.getPostsFromCore()
             if let unwrPost = posts {
